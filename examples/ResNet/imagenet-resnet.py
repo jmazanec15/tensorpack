@@ -101,7 +101,7 @@ def get_config(model, fake=False):
         data=data,
         callbacks=callbacks,
         steps_per_epoch=100 if args.fake else 1281167 // args.batch,
-        max_epoch=105,
+        max_epoch=80,
     )
 
 
