@@ -101,7 +101,7 @@ def get_config(model, fake=False):
         data=data,
         callbacks=callbacks,
         steps_per_epoch=100 if args.fake else 1281167 // args.batch,
-        max_epoch=80,
+        max_epoch=10,
     )
 
 
@@ -116,7 +116,7 @@ if __name__ == '__main__':
     parser.add_argument('-d', '--depth', help='ResNet depth',
                         type=int, default=50, choices=[18, 34, 50, 101, 152])
     parser.add_argument('--eval', action='store_true', help='run offline evaluation instead of training')
-    parser.add_argument('--batch', default=256, type=int,
+    parser.add_argument('--batch', default=128, type=int,
                         help="total batch size. "
                         "Note that it's best to keep per-GPU batch size in [32, 64] to obtain the best accuracy."
                         "Pretrained models listed in README were trained with batch=32x8.")
