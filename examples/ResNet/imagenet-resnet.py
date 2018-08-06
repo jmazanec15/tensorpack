@@ -56,7 +56,7 @@ def get_data(name, batch):
         args.data, name, batch, augmentors)
 
 
-def get_config(model, fake=False):
+def get_config(model, epochs, fake=False):
     nr_tower = max(get_num_gpu(), 1)
     assert args.batch % nr_tower == 0
     batch = args.batch // nr_tower
@@ -116,6 +116,7 @@ if __name__ == '__main__':
     parser.add_argument('-d', '--depth', help='ResNet depth',
                         type=int, default=50, choices=[18, 34, 50, 101, 152])
     parser.add_argument('--eval', action='store_true', help='run offline evaluation instead of training')
+    parser.add_argument('--epochs', default=105, type=int, help="Number of Epochs to train on")
     parser.add_argument('--batch', default=128, type=int,
                         help="total batch size. "
                         "Note that it's best to keep per-GPU batch size in [32, 64] to obtain the best accuracy."
@@ -140,7 +141,7 @@ if __name__ == '__main__':
             logger.set_logger_dir(
                 os.path.join('train_log', 'imagenet-{}-d{}'.format(args.mode, args.depth)))
 
-        config = get_config(model, fake=args.fake)
+        config = get_config(model, args.epochs, fake=args.fake)
         if args.load:
             config.session_init = get_model_loader(args.load)
         trainer = SyncMultiGPUTrainerReplicated(max(get_num_gpu(), 1))
