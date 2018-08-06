@@ -101,7 +101,7 @@ def get_config(model, epochs, fake=False):
         data=data,
         callbacks=callbacks,
         steps_per_epoch=100 if args.fake else 1281167 // args.batch,
-        max_epoch=10,
+        max_epoch=epochs,
     )
 
 
@@ -117,7 +117,7 @@ if __name__ == '__main__':
                         type=int, default=50, choices=[18, 34, 50, 101, 152])
     parser.add_argument('--eval', action='store_true', help='run offline evaluation instead of training')
     parser.add_argument('--epochs', default=105, type=int, help="Number of Epochs to train on")
-    parser.add_argument('--batch', default=128, type=int,
+    parser.add_argument('--batch', default=256, type=int,
                         help="total batch size. "
                         "Note that it's best to keep per-GPU batch size in [32, 64] to obtain the best accuracy."
                         "Pretrained models listed in README were trained with batch=32x8.")
