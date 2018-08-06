@@ -116,7 +116,7 @@ if __name__ == '__main__':
     parser.add_argument('-d', '--depth', help='ResNet depth',
                         type=int, default=50, choices=[18, 34, 50, 101, 152])
     parser.add_argument('--eval', action='store_true', help='run offline evaluation instead of training')
-    parser.add_argument('--epochs', default=105, type=int, help="Number of Epochs to train on")
+    parser.add_argument('--epochs', default=105, type=int, help="Number of epochs to train for")
     parser.add_argument('--batch', default=256, type=int,
                         help="total batch size. "
                         "Note that it's best to keep per-GPU batch size in [32, 64] to obtain the best accuracy."
